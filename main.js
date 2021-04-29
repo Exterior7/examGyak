@@ -33,6 +33,26 @@ const cityFilter2 = (list, population, area) => {
     .map(item => item.name)
 }
 
+const citySorter = (list, key) => {
+    return list.sort((a,b) => a[key] > b[key] ? 1 : -1);
+}
+
+
+const citySorter = (list, key) => {
+    return list.sort((a, b) => {
+        if (typeof a[key] === 'number' && typeof b[key] === 'number') {
+            return a[key] - b[key];
+        } else if (typeof a[key] === 'string' && typeof b[key] === 'string') {
+            return a[key].toLowerCase().toLocaleCompare(b[key].toLowerCase());
+        } else {
+            return 0;
+        }
+    })
+}
+
+const citySlicer = (list, limit) => {
+    return citySorter(list, 'name').slice(0, limit)
+};
 
 const customerFilter = (list, name, rating) => {
     return list.filter( c => c.name.includes(name()) )
